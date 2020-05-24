@@ -93,7 +93,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
             public void onClick(View v) {
 
                 final Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_add_item);
+                dialog.setContentView(R.layout.dialog_new_item);
                 dialog.setCancelable(true);
 
                 TextView tv_message = dialog.findViewById(R.id.message_tv);

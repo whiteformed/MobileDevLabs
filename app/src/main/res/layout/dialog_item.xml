@@ -16,10 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Message"
-            android:textAlignment="center"/>
+            tools:text="Message" />
 
         <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/frame_layout"
@@ -79,32 +79,43 @@
 
         </FrameLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/button_delete"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_marginBottom="8dp"
                 android:background="@color/buttonBackgroundColor"
                 android:text="delete"
                 android:textColor="@color/buttonTextColor" />
 
             <Button
+                android:id="@+id/button_edit"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@color/buttonBackgroundColor"
+                android:text="edit"
+                android:textColor="@color/buttonTextColor" />
+
+            <Button
                 android:id="@+id/button_save"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="8dp"
                 android:background="@color/buttonBackgroundColor"
                 android:text="save"
                 android:textColor="@color/buttonTextColor" />
 
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
 

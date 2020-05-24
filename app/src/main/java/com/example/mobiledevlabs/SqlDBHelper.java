@@ -110,9 +110,6 @@ public class SqlDBHelper extends SQLiteOpenHelper {
     public boolean deleteData(String table, Country country) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //todo change input parameters
-        //todo: change whereClause
-
         String whereClause
                 = column_country_name + " = '" + country.getName() + "' and "
                 + column_country_capital + " = '" + country.getCapital() + "' and "

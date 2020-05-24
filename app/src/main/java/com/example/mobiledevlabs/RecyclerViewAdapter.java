@@ -81,7 +81,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public boolean onLongClick(View v) {
                 final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.dialog_save_delete_item);
+                dialog.setContentView(R.layout.dialog_item);
                 dialog.setCancelable(true);
 
                 TextView tv_message = dialog.findViewById(R.id.message_tv);
