@@ -20,12 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class FragmentSavedCountries extends Fragment implements RecyclerViewItemClickListener {
     private RecyclerViewAdapter adapter;
-    private ArrayList<Country> savedCountriesArrayList;
+    private ArrayList<Country> countriesArrayList;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SqlDatabaseHelper sqlDatabaseHelper;
     private String tableSavedCountries = SqlDatabaseHelper.getSavedCountriesTableName();
@@ -43,10 +44,10 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         FragmentCountryInfo fragment = new FragmentCountryInfo();
 
         Bundle bundle = new Bundle();
-        bundle.putString("country", savedCountriesArrayList.get(pos).getName());
-        bundle.putString("capital", savedCountriesArrayList.get(pos).getCapital());
-        bundle.putString("square", savedCountriesArrayList.get(pos).getSquare());
-        bundle.putInt("imageID", savedCountriesArrayList.get(pos).getFlag());
+        bundle.putString("country", countriesArrayList.get(pos).getName());
+        bundle.putString("capital", countriesArrayList.get(pos).getCapital());
+        bundle.putString("square", countriesArrayList.get(pos).getSquare());
+        bundle.putInt("imageID", countriesArrayList.get(pos).getFlag());
         fragment.setArguments(bundle);
 
         ((ActivityMain) getNonNullActivity()).setFragment(fragment);
@@ -57,6 +58,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         final Dialog dialog = new Dialog(getNonNullActivity());
         dialog.setContentView(R.layout.dialog_delete_save);
         dialog.setCancelable(true);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
 
@@ -66,9 +68,9 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
         tv_message.setText(R.string.tv_message_question);
 
-        tv_country.setText(savedCountriesArrayList.get(pos).getName());
-        tv_capital.setText(savedCountriesArrayList.get(pos).getCapital());
-        iv_flag.setImageResource(savedCountriesArrayList.get(pos).getFlag());
+        tv_country.setText(countriesArrayList.get(pos).getName());
+        tv_capital.setText(countriesArrayList.get(pos).getCapital());
+        iv_flag.setImageResource(countriesArrayList.get(pos).getFlag());
 
         Button button_delete = dialog.findViewById(R.id.button_delete);
         Button button_update = dialog.findViewById(R.id.button_update);
@@ -90,7 +92,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
             }
         };
 
-        if (sqlDatabaseHelper.hasCountry(tableSavedCountries, savedCountriesArrayList.get(pos))) {
+        if (sqlDatabaseHelper.hasCountry(tableSavedCountries, countriesArrayList.get(pos))) {
             button_save.setText(R.string.btn_text_saved);
             button_save.setTextColor(getResources().getColor(R.color.colorInactiveButtonText, null));
             button_save.setBackgroundColor(getResources().getColor(R.color.colorInactiveButtonBackground, null));
@@ -114,15 +116,32 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
     }
 
     private void onDeleteItemButtonClicked(int pos) {
-        boolean success = sqlDatabaseHelper.deleteCountry(tableSavedCountries, savedCountriesArrayList.get(pos));
+        boolean success = sqlDatabaseHelper.deleteCountry(tableSavedCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
         if (success) {
-            Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted " + savedCountriesArrayList.get(pos).getName() + " from DB");
+            Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted " + countriesArrayList.get(pos).getName() + " from DB");
             Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
         } else {
-            Log.i(TAG, "onDeleteItemButtonClicked: Failed deleting " + savedCountriesArrayList.get(pos).getName() + " from DB");
+            Log.i(TAG, "onDeleteItemButtonClicked: Failed deleting " + countriesArrayList.get(pos).getName() + " from DB");
             Toast.makeText(getActivity(), "Deleting failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void onSaveItemButtonClicked(int pos) {
+        if (sqlDatabaseHelper.hasCountry(tableSavedCountries, countriesArrayList.get(pos))) {
+            Toast.makeText(getActivity(), "Already in Saved Countries!", Toast.LENGTH_SHORT).show();
+        } else {
+            boolean success = sqlDatabaseHelper.insertCountry(tableSavedCountries, countriesArrayList.get(pos));
+            accessDatabase(1);
+
+            if (success) {
+                Log.i(TAG, "onSaveItemButtonClicked: Successfully saved " + countriesArrayList.get(pos).getName() + " to DB");
+                Toast.makeText(getActivity(), "Successfully saved", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i(TAG, "onSaveItemButtonClicked: Failed saving " + countriesArrayList.get(pos).getName() + " to DB");
+                Toast.makeText(getActivity(), "Saving failed", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -130,11 +149,12 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         final Dialog dialog = new Dialog(getNonNullActivity());
         dialog.setContentView(R.layout.dialog_insert_update);
         dialog.setCancelable(true);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
         tv_message.setText(R.string.tv_message_update);
 
-        final Country oldCountry = savedCountriesArrayList.get(pos);
+        final Country oldCountry = countriesArrayList.get(pos);
 
         final EditText et_country = dialog.findViewById(R.id.et_country);
         final EditText et_capital = dialog.findViewById(R.id.et_capital);
@@ -181,23 +201,6 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         dialog.show();
     }
 
-    private void onSaveItemButtonClicked(int pos) {
-        if (sqlDatabaseHelper.hasCountry(tableSavedCountries, savedCountriesArrayList.get(pos))) {
-            Toast.makeText(getActivity(), "Already in Saved Countries!", Toast.LENGTH_SHORT).show();
-        } else {
-            boolean success = sqlDatabaseHelper.insertCountry(tableSavedCountries, savedCountriesArrayList.get(pos));
-            accessDatabase(1);
-
-            if (success) {
-                Log.i(TAG, "onSaveItemButtonClicked: Successfully saved " + savedCountriesArrayList.get(pos).getName() + " to DB");
-                Toast.makeText(getActivity(), "Successfully saved", Toast.LENGTH_SHORT).show();
-            } else {
-                Log.i(TAG, "onSaveItemButtonClicked: Failed saving " + savedCountriesArrayList.get(pos).getName() + " to DB");
-                Toast.makeText(getActivity(), "Saving failed", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -207,8 +210,8 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_saved);
 
         sqlDatabaseHelper = new SqlDatabaseHelper(getActivity());
-        savedCountriesArrayList = new ArrayList<>();
-        adapter = new RecyclerViewAdapter(getActivity(), savedCountriesArrayList);
+        countriesArrayList = new ArrayList<>();
+        adapter = new RecyclerViewAdapter(getActivity(), countriesArrayList);
         adapter.setRecyclerViewItemClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -231,7 +234,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
     private void accessDatabase(int i) {
         Integer[] ops = {0, 1};
-        AsynchronousTask accessDatabase = new AsynchronousTask(adapter, savedCountriesArrayList, sqlDatabaseHelper, tableSavedCountries);
+        AsynchronousTask accessDatabase = new AsynchronousTask(adapter, countriesArrayList, sqlDatabaseHelper, tableSavedCountries);
         accessDatabase.execute(ops[i]);
     }
 }

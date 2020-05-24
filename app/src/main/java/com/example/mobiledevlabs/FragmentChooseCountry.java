@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -60,6 +61,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         final Dialog dialog = new Dialog(getNonNullActivity());
         dialog.setContentView(R.layout.dialog_delete_save);
         dialog.setCancelable(true);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
 
@@ -150,6 +152,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         final Dialog dialog = new Dialog(getNonNullActivity());
         dialog.setContentView(R.layout.dialog_insert_update);
         dialog.setCancelable(true);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
         tv_message.setText(R.string.tv_message_update);
@@ -218,6 +221,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         final Dialog dialog = new Dialog(getNonNullActivity());
         dialog.setContentView(R.layout.dialog_insert_update);
         dialog.setCancelable(true);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
         tv_message.setText(R.string.tv_message_add);
