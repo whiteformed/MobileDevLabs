@@ -15,20 +15,20 @@ import android.widget.TextView;
 
 
 public class FragmentCountryInfo extends Fragment {
-    TextView tv_country;
-    TextView tv_capital;
-    TextView tv_square;
-    ImageView iv;
+    private TextView tv_country;
+    private TextView tv_capital;
+    private TextView tv_square;
+    private ImageView iv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_country_info, container, false);
 
-        tv_country = (TextView) view.findViewById(R.id.country_name);
-        tv_capital = (TextView) view.findViewById(R.id.country_capital_name);
-        tv_square = (TextView) view.findViewById(R.id.country_square);
-        iv = (ImageView) view.findViewById(R.id.country_flag);
+        tv_country = view.findViewById(R.id.country_name);
+        tv_capital = view.findViewById(R.id.country_capital_name);
+        tv_square = view.findViewById(R.id.country_square);
+        iv = view.findViewById(R.id.country_flag);
 
         Bundle bundle = getArguments();
 

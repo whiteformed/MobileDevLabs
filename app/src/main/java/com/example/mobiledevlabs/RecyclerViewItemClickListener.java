@@ -1,9 +1,7 @@
 package com.example.mobiledevlabs;
 
 public interface RecyclerViewItemClickListener {
-    void onDeleteItemButtonClicked(int pos);
+    void onItemClickListener(int pos);
 
-    void onUpdateItemButtonClicked(int pos);
-
-    void onSaveItemButtonClicked(int pos);
+    void onItemLongClickListener(int pos);
 }

@@ -20,7 +20,6 @@ public class ActivityMain extends AppCompatActivity {
 
     FragmentChooseCountry fragmentChooseCountry;
     FragmentSavedCountries fragmentSavedCountries;
-
     FragmentCountryInfo fragmentCountryInfo;
     FragmentAboutAuthor fragmentAboutAuthor;
 
