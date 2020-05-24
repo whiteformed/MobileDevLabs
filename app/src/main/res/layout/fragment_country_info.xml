@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".FragmentCountryInfo">
+
+    <ImageView
+        android:id="@+id/country_flag"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:id="@+id/country_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="38sp"
+        tools:text="Country" />
+
+    <TextView
+        android:id="@+id/country_capital_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        tools:text="Capital" />
+
+    <TextView
+        android:id="@+id/country_square"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        tools:text="Square" />
+</LinearLayout>

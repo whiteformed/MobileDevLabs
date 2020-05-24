@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="images">
+        <item>@drawable/dutch_flag</item>
+        <item>@drawable/greenland_flag</item>
+        <item>@drawable/thai_flag</item>
+        <item>@drawable/bolivian_flag</item>
+        <item>@drawable/french_flag</item>
+        <item>@drawable/spanish_flag</item>
+        <item>@drawable/chilean_flag</item>
+        <item>@drawable/peruvian_flag</item>
+        <item>@drawable/italian_flag</item>
+        <item>@drawable/german_flag</item>
+        <item>@drawable/swedish_flag</item>
+        <item>@drawable/iceland_flag</item>
+        <item>@drawable/american_flag</item>
+        <item>@drawable/irish_flag</item>
+        <item>@drawable/kazakh_flag</item>
+        <item>@drawable/armenian_flag</item>
+        <item>@drawable/chinese_flag</item>
+        <item>@drawable/uzbek_flag</item>
+        <item>@drawable/kyrgyz_flag</item>
+        <item>@drawable/filippine_flag</item>
+        <item>@drawable/australian_flag</item>
+        <item>@drawable/indian_flag</item>
+        <item>@drawable/mongolian_flag</item>
+        <item>@drawable/vietnamese_flag</item>
+        <item>@drawable/japanese_flag</item>
+        <item>@drawable/canadian_flag</item>
+        <item>@drawable/romanian_flag</item>
+        <item>@drawable/polish_flag</item>
+        <item>@drawable/british_flag</item>
+    </integer-array>
+</resources>

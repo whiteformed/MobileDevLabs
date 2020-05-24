@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/choose_country"
+            android:icon="@drawable/ic_choose"
+            android:title="Choose Country" />
+        <item
+            android:id="@+id/saved_countries"
+            android:icon="@drawable/ic_saved"
+            android:title="Saved Countries" />
+        <item
+            android:id="@+id/country_info"
+            android:icon="@drawable/ic_info"
+            android:title="Country Info" />
+        <item
+            android:id="@+id/about_author"
+            android:icon="@drawable/ic_about"
+            android:title="About Author" />
+    </group>
+</menu>
