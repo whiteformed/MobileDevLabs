@@ -42,6 +42,11 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
     }
 
     @Override
+    public void onEditItemButtonClicked(int pos) {
+
+    }
+
+    @Override
     public void onSaveItemButtonClicked(int pos) {
         Toast.makeText(getActivity(), "Already in Saved Countries", Toast.LENGTH_SHORT).show();
     }

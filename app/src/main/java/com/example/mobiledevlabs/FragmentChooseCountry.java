@@ -65,6 +65,60 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         }
     }
 
+    @Override
+    public void onEditItemButtonClicked(int pos) {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_new_item);
+        dialog.setCancelable(true);
+
+        TextView tv_message = dialog.findViewById(R.id.message_tv);
+        tv_message.setText("Add a new item to list");
+
+        final Country oldCountry = countriesArrayList.get(pos);
+
+        final EditText et_country = dialog.findViewById(R.id.et_country);
+        final EditText et_capital = dialog.findViewById(R.id.et_capital);
+        final EditText et_square = dialog.findViewById(R.id.et_square);
+
+        et_country.setText(oldCountry.getName());
+        et_capital.setText(oldCountry.getCapital());
+        et_square.setText(oldCountry.getSquare());
+
+        final Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_button_alpha);
+        Button button_edit = dialog.findViewById(R.id.button_confirm);
+
+        View.OnClickListener onButtonAddClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et_country.getText().toString().equals("") || et_capital.getText().toString().equals("") || et_square.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    v.startAnimation(animAlpha);
+                    Country newCountry = new Country(et_country.getText().toString(), et_capital.getText().toString(), et_square.getText().toString());
+
+                    boolean res = sqlDBHelper.updateData(tableSavedCountries, oldCountry, newCountry);
+                    accessDatabase(1);
+
+                    if (res) {
+                        Log.i(TAG, "onEditItemButtonClicked: Successfully updated " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
+                        Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Log.i(TAG, "onEditItemButtonClicked: Failed updating " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
+                        Toast.makeText(getActivity(), "Updating failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    dialog.cancel();
+                }
+            }
+        };
+
+        button_edit.setOnClickListener(onButtonAddClickListener);
+
+        dialog.show();
+    }
+
     public void onAddItemButtonClicked(Country country) {
         boolean res = sqlDBHelper.addData(tableCountries, country);
         accessDatabase(1);
@@ -104,7 +158,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                 final EditText et_square = dialog.findViewById(R.id.et_square);
 
                 final Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_button_alpha);
-                Button button_add = dialog.findViewById(R.id.button_save);
+                Button button_add = dialog.findViewById(R.id.button_confirm);
 
                 View.OnClickListener onButtonAddClickListener = new View.OnClickListener() {
                     @Override

@@ -122,7 +122,7 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         return rowsAffected != 0;
     }
 
-    public boolean editData(String table, Country oldCountry, Country newCountry) {
+    public boolean updateData(String table, Country oldCountry, Country newCountry) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();

@@ -95,7 +95,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 iv_flag.setImageResource(countriesArrayList.get(holder.getAdapterPosition()).getFlag());
 
                 final Animation animAlpha = AnimationUtils.loadAnimation(context, R.anim.anim_button_alpha);
-                Button button_save = dialog.findViewById(R.id.button_save);
+                Button button_save = dialog.findViewById(R.id.button_confirm);
+                Button button_edit = dialog.findViewById(R.id.button_edit);
                 Button button_delete = dialog.findViewById(R.id.button_delete);
 
                 View.OnClickListener onButtonSaveClickListener = new View.OnClickListener() {
@@ -103,6 +104,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     public void onClick(View v) {
                         v.startAnimation(animAlpha);
                         recyclerViewItemClickListener.onSaveItemButtonClicked(holder.getAdapterPosition());
+                        dialog.cancel();
+                    }
+                };
+
+                View.OnClickListener onButtonEditClickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.startAnimation(animAlpha);
+                        recyclerViewItemClickListener.onEditItemButtonClicked(holder.getAdapterPosition());
                         dialog.cancel();
                     }
                 };
@@ -117,6 +127,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 };
 
                 button_save.setOnClickListener(onButtonSaveClickListener);
+                button_edit.setOnClickListener(onButtonEditClickListener);
                 button_delete.setOnClickListener(onButtonDeleteClickListener);
 
                 dialog.show();
