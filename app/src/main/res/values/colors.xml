@@ -7,6 +7,7 @@
 
     <color name="colorActiveButtonBackground">#369CE1</color>
     <color name="colorActiveButtonText">#F2F3F3</color>
+    <color name="colorActiveButtonBackgroundPressed">#0D629C</color>
     <color name="colorInactiveButtonBackground">#BEBFBF</color>
     <color name="colorInactiveButtonText">#2E2929</color>
 
