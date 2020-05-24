@@ -32,6 +32,15 @@ public class SqlDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        createTables(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    private void createTables(SQLiteDatabase db) {
         sqlCommand = "create table " + table_countries + " (" + column_country_id + " integer primary key autoincrement, " + column_country_name + " text, " + column_country_capital + " text, " + column_country_square + " text)";
         db.execSQL(sqlCommand);
 
@@ -42,29 +51,24 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCommand);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
-
     public boolean addUser(String log, String pw) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
+        contentValues.put(column_user_login, log);
+        contentValues.put(column_user_password, pw);
 
-        contentValues.put("login", log);
-        contentValues.put("password", pw);
-
-        long result = db.insert(table_users, null, contentValues);
+        long rowInserted = db.insert(table_users, null, contentValues);
 
         db.close();
 
-        return result != -1;
+        return rowInserted != -1;
     }
 
     public boolean getUser(String log, String pw) {
-        boolean exists = false;
         SQLiteDatabase db = this.getReadableDatabase();
+
+        boolean exists = false;
 
         sqlCommand = "select * from " + table_users + " where " + column_user_login + " = '" + log + "' and " + column_user_password + " = '" + pw + "'";
         Cursor cursor = db.rawQuery(sqlCommand, null);
@@ -83,23 +87,15 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(column_country_name, country.getName());
         contentValues.put(column_country_capital, country.getCapital());
         contentValues.put(column_country_square, country.getSquare());
 
-        long result = db.insert(table, null, contentValues);
+        long rowInserted = db.insert(table, null, contentValues);
 
         db.close();
 
-        return result != -1;
-
-//        sqlCommand = "insert into " + table_countries + " (" + column_name + ", " + column_capital + ", " + column_square + ") values " + "(" + country.getName() + ", " + country.getCapital() + ", " + country.getSquare() + ")";
-//        db.execSQL(sqlCommand);
-
-//        db.close();
-
-//        return;
+        return rowInserted != -1;
     }
 
     public boolean addDataList(String table, ArrayList<Country> countryArrayList) {
@@ -111,16 +107,40 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean deleteData(String table, String country_name) {
+    public boolean deleteData(String table, Country country) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(table, column_country_name + " = '" + country_name + "'", null);
-        //sqlCommand = "delete from " + table_countries + " where " + column_country_name + " = '" + country_name + "'";
-        //db.execSQL(sqlCommand);
+        //todo change input parameters
+        //todo: change whereClause
+
+        String whereClause
+                = column_country_name + " = '" + country.getName() + "' and "
+                + column_country_capital + " = '" + country.getCapital() + "' and "
+                + column_country_square + " = '" + country.getSquare() + "'";
+
+        int rowsAffected = db.delete(table, whereClause, null);
 
         db.close();
 
-        return true;
+        return rowsAffected != 0;
+    }
+
+    public boolean editData(String table, Country oldCountry, Country newCountry) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column_country_name, newCountry.getName());
+        contentValues.put(column_country_capital, newCountry.getCapital());
+        contentValues.put(column_country_square, newCountry.getSquare());
+
+        String whereClause
+                = column_country_name + " = '" + oldCountry.getName() + "' and "
+                + column_country_capital + " = '" + oldCountry.getCapital() + "' and "
+                + column_country_square + " = '" + oldCountry.getSquare() + "'";
+
+        int rowsAffected = db.update(table, contentValues, whereClause, null);
+
+        return rowsAffected != 0;
     }
 
     public ArrayList<Country> getDataList(String table) {
