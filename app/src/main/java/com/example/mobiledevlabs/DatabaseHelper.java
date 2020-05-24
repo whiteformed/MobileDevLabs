@@ -65,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowInserted != -1;
     }
 
-    public boolean checkUser(String log, String pw) {
+    public boolean hasUser(String log, String pw) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         boolean exists = false;
@@ -143,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowsAffected != 0;
     }
 
-    public boolean checkCountry(String table, Country country) {
+    public boolean hasCountry(String table, Country country) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         boolean exists = false;

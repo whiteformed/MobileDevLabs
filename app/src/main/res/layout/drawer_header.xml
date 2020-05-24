@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:contentDescription="@string/user_profile_picture"
         android:id="@+id/usrImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -20,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:text="You've logged in as "
+        android:text="@string/message_default_user"
         android:textSize="17sp"
         android:textStyle="bold" />
 

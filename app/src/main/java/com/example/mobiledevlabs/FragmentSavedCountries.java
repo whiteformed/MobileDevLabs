@@ -148,7 +148,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
                 if (newCountry.getName().trim().equals("") || newCountry.getCapital().trim().equals("") || newCountry.getSquare().trim().equals("")) {
                     Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
                 }
-                else if (databaseHelper.checkCountry(tableSavedCountries, newCountry)) {
+                else if (databaseHelper.hasCountry(tableSavedCountries, newCountry)) {
                     Toast.makeText(getActivity(), "This item already exists!", Toast.LENGTH_SHORT).show();
                 }
                 else {

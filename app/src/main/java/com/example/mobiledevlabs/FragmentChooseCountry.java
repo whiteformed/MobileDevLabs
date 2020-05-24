@@ -119,6 +119,10 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     }
 
     private void onSaveItemButtonClicked(int pos) {
+        if (databaseHelper.hasCountry(tableSavedCountries, countriesArrayList.get(pos))) {
+            Toast.makeText(getActivity(), "This item already exists!", Toast.LENGTH_SHORT).show();
+        }
+
         boolean success = databaseHelper.addCountry(tableSavedCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
@@ -164,7 +168,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                 if (newCountry.getName().trim().equals("") || newCountry.getCapital().trim().equals("") || newCountry.getSquare().trim().equals("")) {
                     Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
                 }
-                else if (databaseHelper.checkCountry(tableCountries, newCountry)) {
+                else if (databaseHelper.hasCountry(tableCountries, newCountry)) {
                     Toast.makeText(getActivity(), "This item already exists!", Toast.LENGTH_SHORT).show();
                 }
                 else {
