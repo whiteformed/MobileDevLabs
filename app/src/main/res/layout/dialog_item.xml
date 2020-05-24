@@ -96,7 +96,7 @@
                 android:textColor="@color/buttonTextColor" />
 
             <Button
-                android:id="@+id/button_edit"
+                android:id="@+id/button_update"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

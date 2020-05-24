@@ -55,8 +55,8 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(column_user_login, log);
-        contentValues.put(column_user_password, pw);
+        contentValues.put(column_user_login, log.trim());
+        contentValues.put(column_user_password, pw.trim());
 
         long rowInserted = db.insert(table_users, null, contentValues);
 
@@ -87,9 +87,9 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(column_country_name, country.getName());
-        contentValues.put(column_country_capital, country.getCapital());
-        contentValues.put(column_country_square, country.getSquare());
+        contentValues.put(column_country_name, country.getName().trim());
+        contentValues.put(column_country_capital, country.getCapital().trim());
+        contentValues.put(column_country_square, country.getSquare().trim());
 
         long rowInserted = db.insert(table, null, contentValues);
 
@@ -111,9 +111,9 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String whereClause
-                = column_country_name + " = '" + country.getName() + "' and "
-                + column_country_capital + " = '" + country.getCapital() + "' and "
-                + column_country_square + " = '" + country.getSquare() + "'";
+                = column_country_name + " = '" + country.getName().trim() + "' and "
+                + column_country_capital + " = '" + country.getCapital().trim() + "' and "
+                + column_country_square + " = '" + country.getSquare().trim() + "'";
 
         int rowsAffected = db.delete(table, whereClause, null);
 
@@ -126,14 +126,14 @@ public class SqlDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(column_country_name, newCountry.getName());
-        contentValues.put(column_country_capital, newCountry.getCapital());
-        contentValues.put(column_country_square, newCountry.getSquare());
+        contentValues.put(column_country_name, newCountry.getName().trim());
+        contentValues.put(column_country_capital, newCountry.getCapital().trim());
+        contentValues.put(column_country_square, newCountry.getSquare().trim());
 
         String whereClause
-                = column_country_name + " = '" + oldCountry.getName() + "' and "
-                + column_country_capital + " = '" + oldCountry.getCapital() + "' and "
-                + column_country_square + " = '" + oldCountry.getSquare() + "'";
+                = column_country_name + " = '" + oldCountry.getName().trim() + "' and "
+                + column_country_capital + " = '" + oldCountry.getCapital().trim() + "' and "
+                + column_country_square + " = '" + oldCountry.getSquare().trim() + "'";
 
         int rowsAffected = db.update(table, contentValues, whereClause, null);
 

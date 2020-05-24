@@ -85,10 +85,10 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         et_square.setText(oldCountry.getSquare());
 
         final Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_button_alpha);
-        Button button_edit = dialog.findViewById(R.id.button_confirm);
-        button_edit.setText(R.string.button_text_update);
+        Button button_update = dialog.findViewById(R.id.button_confirm);
+        button_update.setText(R.string.button_text_update);
 
-        View.OnClickListener onButtonAddClickListener = new View.OnClickListener() {
+        View.OnClickListener onButtonUpdateClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (et_country.getText().toString().equals("") || et_capital.getText().toString().equals("") || et_square.getText().toString().equals("")) {
@@ -102,11 +102,11 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                     accessDatabase(1);
 
                     if (success) {
-                        Log.i(TAG, "onEditItemButtonClicked: Successfully updated " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
+                        Log.i(TAG, "onUpdateItemButtonClicked: Successfully updated " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
                         Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Log.i(TAG, "onEditItemButtonClicked: Failed updating " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
+                        Log.i(TAG, "onUpdateItemButtonClicked: Failed updating " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
                         Toast.makeText(getActivity(), "Updating failed", Toast.LENGTH_SHORT).show();
                     }
 
@@ -115,7 +115,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
             }
         };
 
-        button_edit.setOnClickListener(onButtonAddClickListener);
+        button_update.setOnClickListener(onButtonUpdateClickListener);
 
         dialog.show();
     }
