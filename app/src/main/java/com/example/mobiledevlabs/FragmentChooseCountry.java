@@ -37,7 +37,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
-        boolean res = sqlDBHelper.deleteData(tableCountries, countriesArrayList.get(pos).getName());
+        boolean res = sqlDBHelper.deleteData(tableCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
         if (res) {
