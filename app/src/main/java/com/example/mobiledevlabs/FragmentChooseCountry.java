@@ -66,7 +66,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     }
 
     @Override
-    public void onEditItemButtonClicked(int pos) {
+    public void onUpdateItemButtonClicked(int pos) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_new_item);
         dialog.setCancelable(true);
@@ -86,7 +86,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
         final Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_button_alpha);
         Button button_edit = dialog.findViewById(R.id.button_confirm);
-        button_edit.setText(R.string.button_text_edit);
+        button_edit.setText(R.string.button_text_update);
 
         View.OnClickListener onButtonAddClickListener = new View.OnClickListener() {
             @Override

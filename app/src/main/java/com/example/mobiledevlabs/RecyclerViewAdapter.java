@@ -112,7 +112,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onClick(View v) {
                         v.startAnimation(animAlpha);
-                        recyclerViewItemClickListener.onEditItemButtonClicked(holder.getAdapterPosition());
+                        recyclerViewItemClickListener.onUpdateItemButtonClicked(holder.getAdapterPosition());
                         dialog.cancel();
                     }
                 };

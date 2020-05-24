@@ -42,7 +42,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
     }
 
     @Override
-    public void onEditItemButtonClicked(int pos) {
+    public void onUpdateItemButtonClicked(int pos) {
 
     }
 
