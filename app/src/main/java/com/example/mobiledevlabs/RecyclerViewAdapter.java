@@ -85,7 +85,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 dialog.setCancelable(true);
 
                 TextView tv_message = dialog.findViewById(R.id.message_tv);
-                tv_message.setText("What would you like to do with this item?");
+                tv_message.setText(R.string.message_question);
 
                 TextView tv_country = dialog.findViewById(R.id.tv_country);
                 TextView tv_capital = dialog.findViewById(R.id.tv_capital);
@@ -95,7 +95,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 iv_flag.setImageResource(countriesArrayList.get(holder.getAdapterPosition()).getFlag());
 
                 final Animation animAlpha = AnimationUtils.loadAnimation(context, R.anim.anim_button_alpha);
-                Button button_save = dialog.findViewById(R.id.button_confirm);
+                Button button_save = dialog.findViewById(R.id.button_save);
                 Button button_update = dialog.findViewById(R.id.button_update);
                 Button button_delete = dialog.findViewById(R.id.button_delete);
 

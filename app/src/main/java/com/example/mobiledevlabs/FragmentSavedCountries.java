@@ -1,5 +1,6 @@
 package com.example.mobiledevlabs;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,13 +20,12 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class FragmentSavedCountries extends Fragment implements RecyclerViewItemClickListener {
-    private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private ArrayList<Country> savedCountriesArrayList;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SqlDBHelper sqlDBHelper;
-    private String tableCountries = SqlDBHelper.getTableCountries();
     private String tableSavedCountries = SqlDBHelper.getTableSavedCountries();
+    private Activity activity = getActivity();
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
@@ -34,10 +34,10 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
         if (res) {
             Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted " + savedCountriesArrayList.get(pos).getName() + " from DB");
-            Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Successfully deleted", Toast.LENGTH_SHORT).show();
         } else {
             Log.i(TAG, "onDeleteItemButtonClicked: Failed deleting " + savedCountriesArrayList.get(pos).getName() + " from DB");
-            Toast.makeText(getActivity(), "Deleting failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Deleting failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -48,7 +48,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
     @Override
     public void onSaveItemButtonClicked(int pos) {
-        Toast.makeText(getActivity(), "Already in Saved Countries", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Already in Saved Countries", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -56,15 +56,15 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_saved_countries, container, false);
 
-        recyclerView = view.findViewById(R.id.recycler_view_saved);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_saved);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_saved);
 
-        sqlDBHelper = new SqlDBHelper(getActivity());
+        sqlDBHelper = new SqlDBHelper(activity);
         savedCountriesArrayList = new ArrayList<>();
-        adapter = new RecyclerViewAdapter(getActivity(), getParentFragmentManager(), savedCountriesArrayList);
+        adapter = new RecyclerViewAdapter(activity, getParentFragmentManager(), savedCountriesArrayList);
         adapter.setRecyclerViewItemClickListener(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
         performTask(1); // get
 

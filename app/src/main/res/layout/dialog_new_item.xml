@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@color/buttonBackgroundColor"
-                android:text="edit/add"
+                android:text="add/update"
                 android:textColor="@color/buttonTextColor" />
 
         </RelativeLayout>

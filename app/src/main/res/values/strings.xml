@@ -18,70 +18,7 @@
     <string name="authors_name">Denis</string>
     <string name="message_update">Update selected item</string>
     <string name="button_text_update">update</string>
-    <string name="message_add">Add a new item to list</string>
+    <string name="message_add">Add a new item</string>
     <string name="button_text_add">add</string>
-
-    <string-array name="currencies">
-        <item>Euro</item>
-        <item>Krone</item>
-        <item>Baht</item>
-        <item>Boliviano</item>
-        <item>Franc</item>
-        <item>Euro</item>
-        <item>Peso</item>
-        <item>Sol</item>
-        <item>Lira</item>
-        <item>Euro</item>
-        <item>Krona</item>
-        <item>Krona</item>
-        <item>Dollar</item>
-        <item>Pound</item>
-        <item>Tenge</item>
-        <item>Dram</item>
-        <item>Yuan</item>
-        <item>Som</item>
-        <item>Som</item>
-        <item>Peso</item>
-        <item>Dollar</item>
-        <item>Rupee</item>
-        <item>Tugrik</item>
-        <item>Dong</item>
-        <item>Yen</item>
-        <item>Dollar</item>
-        <item>Leu</item>
-        <item>Zloty</item>
-        <item>Pound sterling</item>
-    </string-array>
-
-    <string-array name="countries">
-        <item>Netherlands</item>
-        <item>Greenland</item>
-        <item>Thailand</item>
-        <item>Bolivia</item>
-        <item>France</item>
-        <item>Spain</item>
-        <item>Chili</item>
-        <item>Peru</item>
-        <item>Italy</item>
-        <item>Germany</item>
-        <item>Sweden</item>
-        <item>Iceland</item>
-        <item>United States</item>
-        <item>Ireland</item>
-        <item>Kazakhstan</item>
-        <item>Armenia</item>
-        <item>China</item>
-        <item>Uzbekistan</item>
-        <item>Kyrgyzstan</item>
-        <item>Philippines</item>
-        <item>Australia</item>
-        <item>India</item>
-        <item>Mongolia</item>
-        <item>Vietnam</item>
-        <item>Japan</item>
-        <item>Canada</item>
-        <item>Romania</item>
-        <item>Poland</item>
-        <item>Great Britain</item>
-    </string-array>
+    <string name="message_question">What would you like to do with this item?</string>
 </resources>
