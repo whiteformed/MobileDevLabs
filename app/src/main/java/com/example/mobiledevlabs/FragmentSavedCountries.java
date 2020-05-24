@@ -1,6 +1,5 @@
 package com.example.mobiledevlabs;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,7 +24,6 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
     private SwipeRefreshLayout swipeRefreshLayout;
     private SqlDBHelper sqlDBHelper;
     private String tableSavedCountries = SqlDBHelper.getTableSavedCountries();
-    private Activity activity = getActivity();
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
@@ -34,10 +32,10 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
         if (res) {
             Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted " + savedCountriesArrayList.get(pos).getName() + " from DB");
-            Toast.makeText(activity, "Successfully deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
         } else {
             Log.i(TAG, "onDeleteItemButtonClicked: Failed deleting " + savedCountriesArrayList.get(pos).getName() + " from DB");
-            Toast.makeText(activity, "Deleting failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Deleting failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -48,7 +46,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
     @Override
     public void onSaveItemButtonClicked(int pos) {
-        Toast.makeText(activity, "Already in Saved Countries", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Already in Saved Countries", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -59,12 +57,12 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_saved);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_saved);
 
-        sqlDBHelper = new SqlDBHelper(activity);
+        sqlDBHelper = new SqlDBHelper(getActivity());
         savedCountriesArrayList = new ArrayList<>();
-        adapter = new RecyclerViewAdapter(activity, getParentFragmentManager(), savedCountriesArrayList);
+        adapter = new RecyclerViewAdapter(getActivity(), getParentFragmentManager(), savedCountriesArrayList);
         adapter.setRecyclerViewItemClickListener(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         performTask(1); // get
 
