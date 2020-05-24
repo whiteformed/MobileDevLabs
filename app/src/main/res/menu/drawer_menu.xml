@@ -4,18 +4,18 @@
         <item
             android:id="@+id/choose_country"
             android:icon="@drawable/ic_choose"
-            android:title="@string/choose_country" />
+            android:title="@string/menu_item_choose_country" />
         <item
             android:id="@+id/saved_countries"
             android:icon="@drawable/ic_saved"
-            android:title="@string/saved_countries" />
+            android:title="@string/menu_item_saved_countries" />
         <item
             android:id="@+id/country_info"
             android:icon="@drawable/ic_info"
-            android:title="@string/country_info" />
+            android:title="@string/menu_item_country_info" />
         <item
             android:id="@+id/about_author"
             android:icon="@drawable/ic_about"
-            android:title="@string/about_author" />
+            android:title="@string/menu_item_about_author" />
     </group>
 </menu>

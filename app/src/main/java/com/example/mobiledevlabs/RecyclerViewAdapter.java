@@ -1,14 +1,14 @@
 package com.example.mobiledevlabs;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,8 +71,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         };
 
-        holder.frameLayout.setOnClickListener(onClickListener);
-        holder.frameLayout.setOnLongClickListener(onLongClickListener);
+        holder.layout.setOnClickListener(onClickListener);
+        holder.layout.setOnLongClickListener(onLongClickListener);
     }
 
     @Override
@@ -85,15 +85,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView tv_country;
         TextView tv_capital;
         ImageView iv_flag;
-        FrameLayout frameLayout;
+        RelativeLayout layout;
 
         RecyclerViewHolder(View view) {
             super(view);
 
             tv_country = view.findViewById(R.id.tv_country);
             tv_capital = view.findViewById(R.id.tv_capital);
-            iv_flag = view.findViewById(R.id.image_view);
-            frameLayout = view.findViewById(R.id.frame_layout);
+            iv_flag = view.findViewById(R.id.iv_flag);
+            layout = view.findViewById(R.id.item_frame);
         }
     }
 }

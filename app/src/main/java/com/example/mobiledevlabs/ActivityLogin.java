@@ -78,8 +78,6 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_button_alpha);
-
         warningText = findViewById(R.id.warningText);
         inpLog = findViewById(R.id.inpLogin);
         inpPass = findViewById(R.id.inpPassword);
@@ -87,13 +85,11 @@ public class ActivityLogin extends AppCompatActivity {
 
         warningText.setVisibility(View.INVISIBLE);
 
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        SqlDatabaseHelper sqlDatabaseHelper = new SqlDatabaseHelper(this);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animAlpha);
-
                 if (!validateUser()) {
                     String errorMsg = "Something went wrong!";
                     warningText.setVisibility(View.VISIBLE);
@@ -120,10 +116,10 @@ public class ActivityLogin extends AppCompatActivity {
         String log = inpLog.getText().toString();
         String pw = inpPass.getText().toString();
 
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        if (!databaseHelper.hasUser("1", "1"))
-            databaseHelper.addUser("1", "1");
+        SqlDatabaseHelper sqlDatabaseHelper = new SqlDatabaseHelper(this);
+        if (!sqlDatabaseHelper.hasUser(new User("1", "1")))
+            sqlDatabaseHelper.insertUser(new User("1", "1"));
 
-        return (databaseHelper.hasUser(log, pw));
+        return (sqlDatabaseHelper.hasUser(new User(log, pw)));
     }
 }

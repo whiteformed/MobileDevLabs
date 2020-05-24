@@ -19,13 +19,13 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
     private String data = "";
     private RecyclerViewAdapter adapter;
     private ArrayList<Country> countriesArrayList;
-    private DatabaseHelper databaseHelper;
+    private SqlDatabaseHelper sqlDatabaseHelper;
     private String table;
 
-    AsynchronousTask(RecyclerViewAdapter adapter, ArrayList<Country> countriesArrayList, DatabaseHelper databaseHelper, String table) {
+    AsynchronousTask(RecyclerViewAdapter adapter, ArrayList<Country> countriesArrayList, SqlDatabaseHelper sqlDatabaseHelper, String table) {
         this.adapter = adapter;
         this.countriesArrayList = countriesArrayList;
-        this.databaseHelper = databaseHelper;
+        this.sqlDatabaseHelper = sqlDatabaseHelper;
         this.table = table;
     }
 
@@ -86,7 +86,7 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
     }
 
     private void addDataToDatabase() {
-        boolean res = databaseHelper.addCountryList(table, countriesArrayList);
+        boolean res = sqlDatabaseHelper.insertCountryList(table, countriesArrayList);
 
         if (res) {
             Log.i(getClass().getName(), "Successfully added " + table + " table to DB");
@@ -98,7 +98,7 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
 
     private void getDataFromDatabase() {
         countriesArrayList.clear();
-        countriesArrayList.addAll(databaseHelper.getCountryList(table));
+        countriesArrayList.addAll(sqlDatabaseHelper.getCountryList(table));
 
         if (!countriesArrayList.isEmpty()) {
             Log.i(getClass().getName(), "Successfully read " + table + " table from DB");

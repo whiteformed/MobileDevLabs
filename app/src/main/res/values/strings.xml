@@ -1,22 +1,36 @@
 <resources>
     <string name="app_name">MobileDevLabs</string>
 
-    <string name="user_profile_picture">User Profile Picture</string>
-    <string name="message_default_user">You\'ve logged in as</string>
+    <string name="menu_item_choose_country">Choose Country</string>
+    <string name="menu_item_saved_countries">Saved Countries</string>
+    <string name="menu_item_country_info">Country Info</string>
+    <string name="menu_item_about_author">About Author</string>
 
-    <string name="choose_country">Choose Country</string>
-    <string name="saved_countries">Saved Countries</string>
-    <string name="country_info">Country Info</string>
-    <string name="about_author">About Author</string>
+    <string name="tv_application_name">Guide</string>
+    <string name="tv_application_version">v. 1.0.1</string>
+    <string name="tv_authors_name">Denis</string>
 
-    <string name="application_name">Guide</string>
-    <string name="application_version">v. 1.0.1</string>
-    <string name="authors_name">Denis</string>
+    <string name="tv_message_default_user">You\'ve logged in as</string>
+    <string name="tv_message_question">What would you like to do with this item?</string>
+    <string name="tv_message_update">Update selected item</string>
+    <string name="tv_message_add">Add a new item</string>
 
-    <string name="message_question">What would you like to do with this item?</string>
-    <string name="message_update">Update selected item</string>
-    <string name="message_add">Add a new item</string>
+    <string name="btn_text_sign_in">Sign In</string>
+    <string name="btn_text_delete">Delete</string>
+    <string name="btn_text_update">Update</string>
+    <string name="btn_text_save">Save</string>
+    <string name="btn_text_saved">Saved</string>
+    <string name="btn_text_add">Add</string>
+    <string name="btn_text_confirm">Confirm</string>
 
-    <string name="button_text_update">Update</string>
-    <string name="button_text_add">Add</string>
+    <string name="iv_desc_logo_background">Logo Background</string>
+    <string name="iv_desc_logo_foreground">Logo Foreground</string>
+    <string name="iv_desc_user_profile_picture">User Profile Picture</string>
+    <string name="iv_desc_country_flag">Country Flag</string>
+
+    <string name="hnt_country">Country</string>
+    <string name="hnt_capital">Capital</string>
+    <string name="hnt_square">Square</string>
+    <string name="hnt_login">Login</string>
+    <string name="hnt_password">Password</string>
 </resources>

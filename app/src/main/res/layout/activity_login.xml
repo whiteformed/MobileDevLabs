@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:contentDescription="@string/iv_desc_logo_background"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/ic_launcher_background"
@@ -15,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:contentDescription="@string/iv_desc_logo_foreground"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/ic_launcher_foreground"
@@ -28,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="WarningMsg"
+        tools:text="Warning Message"
         android:textAlignment="center"
         android:textColor="#F61010"
         android:textSize="14sp"
@@ -59,8 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="20"
             android:backgroundTint="#1FADED"
-            android:hint="Login"
-            android:inputType="textPersonName" />
+            android:hint="@string/hnt_login"
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/inpPassword"
@@ -68,8 +71,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="20"
             android:backgroundTint="#1FADED"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            android:hint="@string/hnt_password"
+            android:inputType="textPassword"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/confirmButton"
@@ -79,10 +83,11 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_weight="10"
-            android:background="@color/buttonBackgroundColor"
-            android:text="Sign In"
+            android:foreground="@drawable/ripple"
+            android:background="@color/colorActiveButtonBackground"
+            android:text="@string/btn_text_sign_in"
             android:textAlignment="center"
-            android:textColor="@color/buttonTextColor" />
+            android:textColor="@color/colorActiveButtonText" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

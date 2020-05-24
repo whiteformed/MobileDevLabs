@@ -10,8 +10,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class SqlDatabaseHelper extends SQLiteOpenHelper {
     private static final String database_name = "sql_database";
+
     private static final String table_countries = "countries";
     private static final String table_saved_countries = "saved_countries";
     private static final String column_country_id = "id";
@@ -26,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private String sqlCommand;
 
-    DatabaseHelper(@Nullable Context context) {
+    SqlDatabaseHelper(@Nullable Context context) {
         super(context, database_name, null, 1);
     }
 
@@ -51,28 +52,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCommand);
     }
 
-    public boolean addUser(String log, String pw) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(column_user_login, log.trim());
-        contentValues.put(column_user_password, pw.trim());
-
-        long rowInserted = db.insert(table_users, null, contentValues);
-
-        db.close();
-
-        return rowInserted != -1;
-    }
-
-    public boolean hasUser(String log, String pw) {
+    public boolean hasUser(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         boolean exists = false;
 
         sqlCommand = "select * from " + table_users + " where "
-                + column_user_login + " = '" + log + "' and "
-                + column_user_password + " = '" + pw + "'";
+                + column_user_login + " = '" + user.getUsername().trim() + "' and "
+                + column_user_password + " = '" + user.getPassword().trim() + "'";
 
         Cursor cursor = db.rawQuery(sqlCommand, null);
 
@@ -86,7 +73,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return exists;
     }
 
-    public boolean addCountry(String table, Country country) {
+    public boolean insertUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column_user_login, user.getUsername().trim());
+        contentValues.put(column_user_password, user.getPassword().trim());
+
+        long rowInserted = db.insert(table_users, null, contentValues);
+
+        db.close();
+
+        return rowInserted != -1;
+    }
+
+    public boolean insertUserList(ArrayList<User> userArrayList) {
+        for (int i = 0; i < userArrayList.size(); i++) {
+            if (!insertUser(userArrayList.get(i)))
+                return false;
+        }
+
+        return true;
+    }
+
+    public boolean insertCountry(String table, Country country) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -101,9 +111,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowInserted != -1;
     }
 
-    public boolean addCountryList(String table, ArrayList<Country> countryArrayList) {
+    public boolean insertCountryList(String table, ArrayList<Country> countryArrayList) {
         for (int i = 0; i < countryArrayList.size(); i++) {
-            if (!addCountry(table, countryArrayList.get(i)))
+            if (!insertCountry(table, countryArrayList.get(i)))
                 return false;
         }
 
@@ -123,6 +133,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return rowsAffected != 0;
+    }
+
+    public boolean deleteCountryList(String table, ArrayList<Country> countryArrayList) {
+        for (int i = 0; i < countryArrayList.size(); i++) {
+            if (!deleteCountry(table, countryArrayList.get(i)))
+                return false;
+        }
+
+        return true;
     }
 
     public boolean updateCountry(String table, Country oldCountry, Country newCountry) {
@@ -190,15 +209,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return countryArrayList;
     }
 
-    public static String getTableCountries() {
+    public static String getCountriesTableName() {
         return table_countries;
     }
 
-    public static String getTableSavedCountries() {
+    public static String getSavedCountriesTableName() {
         return table_saved_countries;
     }
 
-    public static String getTableUsers() {
+    public static String getUsersTableName() {
         return table_users;
     }
 }
