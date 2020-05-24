@@ -1,6 +1,5 @@
 package com.example.mobiledevlabs;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 
