@@ -86,7 +86,7 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
     }
 
     private void addDataToDatabase() {
-        boolean res = databaseHelper.addDataList(table, countriesArrayList);
+        boolean res = databaseHelper.addCountryList(table, countriesArrayList);
 
         if (res) {
             Log.i(getClass().getName(), "Successfully added " + table + " table to DB");
@@ -98,7 +98,7 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
 
     private void getDataFromDatabase() {
         countriesArrayList.clear();
-        countriesArrayList.addAll(databaseHelper.getDataList(table));
+        countriesArrayList.addAll(databaseHelper.getCountryList(table));
 
         if (!countriesArrayList.isEmpty()) {
             Log.i(getClass().getName(), "Successfully read " + table + " table from DB");

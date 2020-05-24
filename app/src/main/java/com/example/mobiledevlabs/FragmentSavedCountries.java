@@ -32,7 +32,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
-        boolean success = databaseHelper.deleteData(tableSavedCountries, savedCountriesArrayList.get(pos));
+        boolean success = databaseHelper.deleteCountry(tableSavedCountries, savedCountriesArrayList.get(pos));
         accessDatabase(1);
 
         if (success) {
@@ -70,24 +70,27 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         View.OnClickListener onButtonUpdateClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et_country.getText().toString().equals("") || et_capital.getText().toString().equals("") || et_square.getText().toString().equals("")) {
+                Country newCountry = new Country(
+                        et_country.getText().toString(),
+                        et_capital.getText().toString(),
+                        et_square.getText().toString());
+
+                if (newCountry.getName().trim().equals("") || newCountry.getCapital().trim().equals("") || newCountry.getSquare().trim().equals("")) {
                     Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
+                }
+                else if (databaseHelper.checkCountry(tableSavedCountries, newCountry)) {
+                    Toast.makeText(getActivity(), "This item already exists!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     v.startAnimation(animAlpha);
-                    Country newCountry = new Country(
-                            et_country.getText().toString(),
-                            et_capital.getText().toString(),
-                            et_square.getText().toString());
 
-                    boolean success = databaseHelper.updateData(tableSavedCountries, oldCountry, newCountry);
+                    boolean success = databaseHelper.updateCountry(tableSavedCountries, oldCountry, newCountry);
                     accessDatabase(1);
 
                     if (success) {
                         Log.i(TAG, "onUpdateItemButtonClicked: Successfully updated " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
                         Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Log.i(TAG, "onUpdateItemButtonClicked: Failed updating " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
                         Toast.makeText(getActivity(), "Updating failed", Toast.LENGTH_SHORT).show();
                     }

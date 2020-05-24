@@ -121,9 +121,9 @@ public class ActivityLogin extends AppCompatActivity {
         String pw = inpPass.getText().toString();
 
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        if (!databaseHelper.getUser("1", "1"))
+        if (!databaseHelper.checkUser("1", "1"))
             databaseHelper.addUser("1", "1");
 
-        return (databaseHelper.getUser(log, pw));
+        return (databaseHelper.checkUser(log, pw));
     }
 }

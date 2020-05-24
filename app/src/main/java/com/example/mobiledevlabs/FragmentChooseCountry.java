@@ -35,7 +35,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
-        boolean success = databaseHelper.deleteData(tableCountries, countriesArrayList.get(pos));
+        boolean success = databaseHelper.deleteCountry(tableCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
         if (success) {
@@ -49,7 +49,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
     @Override
     public void onSaveItemButtonClicked(int pos) {
-        boolean success = databaseHelper.addData(tableSavedCountries, countriesArrayList.get(pos));
+        boolean success = databaseHelper.addCountry(tableSavedCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
         if (success) {
@@ -87,17 +87,21 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         View.OnClickListener onButtonUpdateClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et_country.getText().toString().equals("") || et_capital.getText().toString().equals("") || et_square.getText().toString().equals("")) {
+                Country newCountry = new Country(
+                        et_country.getText().toString(),
+                        et_capital.getText().toString(),
+                        et_square.getText().toString());
+
+                if (newCountry.getName().trim().equals("") || newCountry.getCapital().trim().equals("") || newCountry.getSquare().trim().equals("")) {
                     Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if (databaseHelper.checkCountry(tableCountries, newCountry)) {
+                    Toast.makeText(getActivity(), "This item already exists!", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     v.startAnimation(animAlpha);
 
-                    Country newCountry = new Country(
-                            et_country.getText().toString(),
-                            et_capital.getText().toString(),
-                            et_square.getText().toString());
-
-                    boolean success = databaseHelper.updateData(tableCountries, oldCountry, newCountry);
+                    boolean success = databaseHelper.updateCountry(tableCountries, oldCountry, newCountry);
                     accessDatabase(1);
 
                     if (success) {
@@ -119,7 +123,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     }
 
     public void onAddItemButtonClicked(Country country) {
-        boolean success = databaseHelper.addData(tableCountries, country);
+        boolean success = databaseHelper.addCountry(tableCountries, country);
         accessDatabase(1);
 
         if (success) {

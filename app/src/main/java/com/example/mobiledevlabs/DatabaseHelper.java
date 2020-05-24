@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -66,12 +65,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowInserted != -1;
     }
 
-    public boolean getUser(String log, String pw) {
+    public boolean checkUser(String log, String pw) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         boolean exists = false;
 
-        sqlCommand = "select * from " + table_users + " where " + column_user_login + " = '" + log + "' and " + column_user_password + " = '" + pw + "'";
+        sqlCommand = "select * from " + table_users + " where "
+                + column_user_login + " = '" + log + "' and "
+                + column_user_password + " = '" + pw + "'";
+
         Cursor cursor = db.rawQuery(sqlCommand, null);
 
         if (cursor.moveToFirst()) {
@@ -84,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return exists;
     }
 
-    public boolean addData(String table, Country country) {
+    public boolean addCountry(String table, Country country) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -99,16 +101,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowInserted != -1;
     }
 
-    public boolean addDataList(String table, ArrayList<Country> countryArrayList) {
+    public boolean addCountryList(String table, ArrayList<Country> countryArrayList) {
         for (int i = 0; i < countryArrayList.size(); i++) {
-            if (!addData(table, countryArrayList.get(i)))
+            if (!addCountry(table, countryArrayList.get(i)))
                 return false;
         }
 
         return true;
     }
 
-    public boolean deleteData(String table, Country country) {
+    public boolean deleteCountry(String table, Country country) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String whereClause
@@ -123,7 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowsAffected != 0;
     }
 
-    public boolean updateData(String table, Country oldCountry, Country newCountry) {
+    public boolean updateCountry(String table, Country oldCountry, Country newCountry) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -141,7 +143,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowsAffected != 0;
     }
 
-    public ArrayList<Country> getDataList(String table) {
+    public boolean checkCountry(String table, Country country) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        boolean exists = false;
+
+        sqlCommand = "select * from " + table + " where "
+                + column_country_name + " = '" + country.getName().trim() + "' and "
+                + column_country_capital + " = '" + country.getCapital().trim() + "' and "
+                + column_country_square + " = '" + country.getSquare().trim() + "'";
+
+        Cursor cursor = db.rawQuery(sqlCommand, null);
+
+        if (cursor.moveToFirst()) {
+            exists = true;
+        }
+
+        cursor.close();
+        db.close();
+
+        return exists;
+    }
+
+    public ArrayList<Country> getCountryList(String table) {
         ArrayList<Country> countryArrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
