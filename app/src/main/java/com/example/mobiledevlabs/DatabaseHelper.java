@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class SqlDBHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String database_name = "sql_database";
     private static final String table_countries = "countries";
     private static final String table_saved_countries = "saved_countries";
@@ -27,7 +27,7 @@ public class SqlDBHelper extends SQLiteOpenHelper {
 
     private String sqlCommand;
 
-    SqlDBHelper(@Nullable Context context) {
+    DatabaseHelper(@Nullable Context context) {
         super(context, database_name, null, 1);
     }
 

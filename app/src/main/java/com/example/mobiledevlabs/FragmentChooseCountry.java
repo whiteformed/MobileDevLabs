@@ -29,13 +29,13 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     private RecyclerViewAdapter adapter;
     private ArrayList<Country> countriesArrayList;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private SqlDBHelper sqlDBHelper;
-    private String tableCountries = SqlDBHelper.getTableCountries();
-    private String tableSavedCountries = SqlDBHelper.getTableSavedCountries();
+    private DatabaseHelper databaseHelper;
+    private String tableCountries = DatabaseHelper.getTableCountries();
+    private String tableSavedCountries = DatabaseHelper.getTableSavedCountries();
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
-        boolean success = sqlDBHelper.deleteData(tableCountries, countriesArrayList.get(pos));
+        boolean success = databaseHelper.deleteData(tableCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
         if (success) {
@@ -50,7 +50,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
     @Override
     public void onSaveItemButtonClicked(int pos) {
-        boolean success = sqlDBHelper.addData(tableSavedCountries, countriesArrayList.get(pos));
+        boolean success = databaseHelper.addData(tableSavedCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
         if (success) {
@@ -96,7 +96,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                     v.startAnimation(animAlpha);
                     Country newCountry = new Country(et_country.getText().toString(), et_capital.getText().toString(), et_square.getText().toString());
 
-                    boolean success = sqlDBHelper.updateData(tableCountries, oldCountry, newCountry);
+                    boolean success = databaseHelper.updateData(tableCountries, oldCountry, newCountry);
                     accessDatabase(1);
 
                     if (success) {
@@ -119,7 +119,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     }
 
     public void onAddItemButtonClicked(Country country) {
-        boolean success = sqlDBHelper.addData(tableCountries, country);
+        boolean success = databaseHelper.addData(tableCountries, country);
         accessDatabase(1);
 
         if (success) {
@@ -183,7 +183,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
         floatingActionButton.setOnClickListener(onClickListener);
 
-        sqlDBHelper = new SqlDBHelper(getActivity());
+        databaseHelper = new DatabaseHelper(getActivity());
         countriesArrayList = new ArrayList<>();
         adapter = new RecyclerViewAdapter(getActivity(), getParentFragmentManager(), countriesArrayList);
         adapter.setRecyclerViewItemClickListener(this);
@@ -208,7 +208,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
     private void accessDatabase(int i) {
         Integer[] ops = {0, 1};
-        AsynchronousTask task = new AsynchronousTask(adapter, countriesArrayList, sqlDBHelper, tableCountries);
+        AsynchronousTask task = new AsynchronousTask(adapter, countriesArrayList, databaseHelper, tableCountries);
         task.execute(ops[i]);
     }
 }

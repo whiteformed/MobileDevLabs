@@ -87,7 +87,7 @@ public class ActivityLogin extends AppCompatActivity {
 
         warningText.setVisibility(View.INVISIBLE);
 
-        SqlDBHelper sqlDBHelper = new SqlDBHelper(this);
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,10 +120,10 @@ public class ActivityLogin extends AppCompatActivity {
         String log = inpLog.getText().toString();
         String pw = inpPass.getText().toString();
 
-        SqlDBHelper sqlDBHelper = new SqlDBHelper(this);
-        if (!sqlDBHelper.getUser("1", "1"))
-            sqlDBHelper.addUser("1", "1");
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        if (!databaseHelper.getUser("1", "1"))
+            databaseHelper.addUser("1", "1");
 
-        return (sqlDBHelper.getUser(log, pw));
+        return (databaseHelper.getUser(log, pw));
     }
 }

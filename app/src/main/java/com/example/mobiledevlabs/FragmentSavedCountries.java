@@ -27,12 +27,12 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
     private RecyclerViewAdapter adapter;
     private ArrayList<Country> savedCountriesArrayList;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private SqlDBHelper sqlDBHelper;
-    private String tableSavedCountries = SqlDBHelper.getTableSavedCountries();
+    private DatabaseHelper databaseHelper;
+    private String tableSavedCountries = DatabaseHelper.getTableSavedCountries();
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
-        boolean success = sqlDBHelper.deleteData(tableSavedCountries, savedCountriesArrayList.get(pos));
+        boolean success = databaseHelper.deleteData(tableSavedCountries, savedCountriesArrayList.get(pos));
         accessDatabase(1);
 
         if (success) {
@@ -77,7 +77,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
                     v.startAnimation(animAlpha);
                     Country newCountry = new Country(et_country.getText().toString(), et_capital.getText().toString(), et_square.getText().toString());
 
-                    boolean success = sqlDBHelper.updateData(tableSavedCountries, oldCountry, newCountry);
+                    boolean success = databaseHelper.updateData(tableSavedCountries, oldCountry, newCountry);
                     accessDatabase(1);
 
                     if (success) {
@@ -112,7 +112,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_saved);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_saved);
 
-        sqlDBHelper = new SqlDBHelper(getActivity());
+        databaseHelper = new DatabaseHelper(getActivity());
         savedCountriesArrayList = new ArrayList<>();
         adapter = new RecyclerViewAdapter(getActivity(), getParentFragmentManager(), savedCountriesArrayList);
         adapter.setRecyclerViewItemClickListener(this);
@@ -137,7 +137,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
 
     private void accessDatabase(int i) {
         Integer[] ops = {0, 1};
-        AsynchronousTask accessDatabase = new AsynchronousTask(adapter, savedCountriesArrayList, sqlDBHelper, tableSavedCountries);
+        AsynchronousTask accessDatabase = new AsynchronousTask(adapter, savedCountriesArrayList, databaseHelper, tableSavedCountries);
         accessDatabase.execute(ops[i]);
     }
 }
