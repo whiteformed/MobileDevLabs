@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,9 +20,16 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="40dp"
+        android:background="@color/colorActiveButtonBackground"
+        android:backgroundTint="@color/colorActiveButtonBackground"
+        android:elevation="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_fab"
+        app:backgroundTint="@color/colorActiveButtonBackground"
+        app:maxImageSize="32dp" />
 </FrameLayout>
