@@ -37,10 +37,10 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
     @Override
     public void onDeleteItemButtonClicked(int pos) {
-        boolean res = sqlDBHelper.deleteData(tableCountries, countriesArrayList.get(pos));
+        boolean success = sqlDBHelper.deleteData(tableCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
-        if (res) {
+        if (success) {
             Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted " + countriesArrayList.get(pos).getName() + " from DB");
             Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
         }
@@ -52,10 +52,10 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
     @Override
     public void onSaveItemButtonClicked(int pos) {
-        boolean res = sqlDBHelper.addData(tableSavedCountries, countriesArrayList.get(pos));
+        boolean success = sqlDBHelper.addData(tableSavedCountries, countriesArrayList.get(pos));
         accessDatabase(1);
 
-        if (res) {
+        if (success) {
             Log.i(TAG, "onSaveItemButtonClicked: Successfully saved " + countriesArrayList.get(pos).getName() + " to DB");
             Toast.makeText(getActivity(), "Successfully saved", Toast.LENGTH_SHORT).show();
         }
@@ -72,7 +72,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         dialog.setCancelable(true);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
-        tv_message.setText("Add a new item to list");
+        tv_message.setText(R.string.message_update);
 
         final Country oldCountry = countriesArrayList.get(pos);
 
@@ -86,6 +86,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
         final Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_button_alpha);
         Button button_edit = dialog.findViewById(R.id.button_confirm);
+        button_edit.setText(R.string.button_text_edit);
 
         View.OnClickListener onButtonAddClickListener = new View.OnClickListener() {
             @Override
@@ -97,10 +98,10 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                     v.startAnimation(animAlpha);
                     Country newCountry = new Country(et_country.getText().toString(), et_capital.getText().toString(), et_square.getText().toString());
 
-                    boolean res = sqlDBHelper.updateData(tableSavedCountries, oldCountry, newCountry);
+                    boolean success = sqlDBHelper.updateData(tableSavedCountries, oldCountry, newCountry);
                     accessDatabase(1);
 
-                    if (res) {
+                    if (success) {
                         Log.i(TAG, "onEditItemButtonClicked: Successfully updated " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
                         Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
                     }
@@ -151,7 +152,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                 dialog.setCancelable(true);
 
                 TextView tv_message = dialog.findViewById(R.id.message_tv);
-                tv_message.setText("Add a new item to list");
+                tv_message.setText(R.string.message_add);
 
                 final EditText et_country = dialog.findViewById(R.id.et_country);
                 final EditText et_capital = dialog.findViewById(R.id.et_capital);
@@ -159,6 +160,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
 
                 final Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_button_alpha);
                 Button button_add = dialog.findViewById(R.id.button_confirm);
+                button_add.setText(R.string.button_text_add);
 
                 View.OnClickListener onButtonAddClickListener = new View.OnClickListener() {
                     @Override

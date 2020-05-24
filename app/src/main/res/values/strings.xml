@@ -16,6 +16,10 @@
     <string name="application_name">Guide</string>
     <string name="application_version">v. 1.0.1</string>
     <string name="authors_name">Denis</string>
+    <string name="message_update">Update selected item</string>
+    <string name="button_text_edit">edit</string>
+    <string name="message_add">Add a new item to list</string>
+    <string name="button_text_add">add</string>
 
     <string-array name="currencies">
         <item>Euro</item>
