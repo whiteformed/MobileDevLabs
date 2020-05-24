@@ -41,8 +41,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         if (success) {
             Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted " + countriesArrayList.get(pos).getName() + " from DB");
             Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             Log.i(TAG, "onDeleteItemButtonClicked: Failed deleting " + countriesArrayList.get(pos).getName() + " from DB");
             Toast.makeText(getActivity(), "Deleting failed", Toast.LENGTH_SHORT).show();
         }
@@ -56,8 +55,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         if (success) {
             Log.i(TAG, "onSaveItemButtonClicked: Successfully saved " + countriesArrayList.get(pos).getName() + " to DB");
             Toast.makeText(getActivity(), "Successfully saved", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             Log.i(TAG, "onSaveItemButtonClicked: Failed saving " + countriesArrayList.get(pos).getName() + " to DB");
             Toast.makeText(getActivity(), "Saving failed", Toast.LENGTH_SHORT).show();
         }
@@ -91,10 +89,13 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
             public void onClick(View v) {
                 if (et_country.getText().toString().equals("") || et_capital.getText().toString().equals("") || et_square.getText().toString().equals("")) {
                     Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     v.startAnimation(animAlpha);
-                    Country newCountry = new Country(et_country.getText().toString(), et_capital.getText().toString(), et_square.getText().toString());
+
+                    Country newCountry = new Country(
+                            et_country.getText().toString(),
+                            et_capital.getText().toString(),
+                            et_square.getText().toString());
 
                     boolean success = databaseHelper.updateData(tableCountries, oldCountry, newCountry);
                     accessDatabase(1);
@@ -102,8 +103,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                     if (success) {
                         Log.i(TAG, "onUpdateItemButtonClicked: Successfully updated " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
                         Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Log.i(TAG, "onUpdateItemButtonClicked: Failed updating " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
                         Toast.makeText(getActivity(), "Updating failed", Toast.LENGTH_SHORT).show();
                     }
@@ -125,8 +125,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         if (success) {
             Log.i(TAG, "onAddItemButtonClicked: Successfully added " + country.getName() + " to DB");
             Toast.makeText(getActivity(), "Successfully added", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             Log.i(TAG, "onAddItemButtonClicked: Failed adding " + country.getName() + " to DB");
             Toast.makeText(getActivity(), "Adding failed", Toast.LENGTH_SHORT).show();
         }
@@ -156,7 +155,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                 final EditText et_capital = dialog.findViewById(R.id.et_capital);
                 final EditText et_square = dialog.findViewById(R.id.et_square);
 
-                final Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_button_alpha);
+                final Animation animAlpha = AnimationUtils.loadAnimation(dialog.getContext(), R.anim.anim_button_alpha);
                 Button button_confirm = dialog.findViewById(R.id.button_confirm);
                 button_confirm.setText(R.string.button_text_add);
 
@@ -165,11 +164,15 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                     public void onClick(View v) {
                         if (et_country.getText().toString().equals("") || et_capital.getText().toString().equals("") || et_square.getText().toString().equals("")) {
                             Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Country country = new Country(et_country.getText().toString(), et_capital.getText().toString(), et_square.getText().toString());
+                        } else {
                             v.startAnimation(animAlpha);
-                            onAddItemButtonClicked(country);
+
+                            Country newCountry = new Country(
+                                    et_country.getText().toString(),
+                                    et_capital.getText().toString(),
+                                    et_square.getText().toString());
+
+                            onAddItemButtonClicked(newCountry);
                             dialog.cancel();
                         }
                     }

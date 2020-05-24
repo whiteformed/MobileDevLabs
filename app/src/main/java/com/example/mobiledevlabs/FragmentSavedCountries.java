@@ -75,7 +75,10 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
                 }
                 else {
                     v.startAnimation(animAlpha);
-                    Country newCountry = new Country(et_country.getText().toString(), et_capital.getText().toString(), et_square.getText().toString());
+                    Country newCountry = new Country(
+                            et_country.getText().toString(),
+                            et_capital.getText().toString(),
+                            et_square.getText().toString());
 
                     boolean success = databaseHelper.updateData(tableSavedCountries, oldCountry, newCountry);
                     accessDatabase(1);
