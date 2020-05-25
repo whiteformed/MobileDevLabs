@@ -24,8 +24,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 public class FragmentChooseCountry extends Fragment implements RecyclerViewItemClickListener {
     private RecyclerViewAdapter adapter;
     private ArrayList<Country> countriesArrayList;
@@ -33,6 +31,8 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     private SqlDatabaseHelper sqlDatabaseHelper;
     private String tableCountries = SqlDatabaseHelper.getCountriesTableName();
     private String tableSavedCountries = SqlDatabaseHelper.getSavedCountriesTableName();
+
+    private static final String TAG = "FragmentChooseCountry";
 
     private FragmentActivity getNonNullActivity() {
         if (super.getActivity() != null) {

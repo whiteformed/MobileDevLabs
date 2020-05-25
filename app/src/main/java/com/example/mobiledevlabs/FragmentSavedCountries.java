@@ -22,14 +22,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 public class FragmentSavedCountries extends Fragment implements RecyclerViewItemClickListener {
     private RecyclerViewAdapter adapter;
     private ArrayList<Country> countriesArrayList;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SqlDatabaseHelper sqlDatabaseHelper;
     private String tableSavedCountries = SqlDatabaseHelper.getSavedCountriesTableName();
+
+    private static final String TAG = "FragmentSavedCountries";
 
     private FragmentActivity getNonNullActivity() {
         if (super.getActivity() != null) {

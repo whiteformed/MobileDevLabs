@@ -20,6 +20,8 @@ public class FragmentCountryInfo extends Fragment {
     private TextView tv_square;
     private ImageView iv;
 
+    private static final String TAG = "FragmentCountryInfo";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -33,10 +35,10 @@ public class FragmentCountryInfo extends Fragment {
         Bundle bundle = getArguments();
 
         if (bundle != null) {
-            Log.i(getClass().getName(), "getIncomingIntent: opening bundle");
+            Log.i(TAG, "getIncomingIntent: opening bundle");
             getIncomingIntent(bundle);
         } else {
-            Log.i(getClass().getName(), "getIncomingIntent: empty bundle");
+            Log.i(TAG, "getIncomingIntent: empty bundle");
         }
 
         return view;

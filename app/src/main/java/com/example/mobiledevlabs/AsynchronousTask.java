@@ -22,6 +22,8 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
     private SqlDatabaseHelper sqlDatabaseHelper;
     private String table;
 
+    private static final String TAG = "AsynchronousTask";
+
     AsynchronousTask(RecyclerViewAdapter adapter, ArrayList<Country> countriesArrayList, SqlDatabaseHelper sqlDatabaseHelper, String table) {
         this.adapter = adapter;
         this.countriesArrayList = countriesArrayList;
@@ -56,14 +58,14 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
             assert link != null;
             urlConnection = (HttpURLConnection) link.openConnection();
         } catch (IOException e) {
-            Log.i(getClass().getName(), "Error occurred while opening connection");
+            Log.i(TAG, "Error occurred while opening connection");
             e.printStackTrace();
         }
 
         try {
             assert urlConnection != null;
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                Log.i(getClass().getName(), "Connection Established");
+                Log.i(TAG, "Connection Established");
 
                 BufferedReader input = new BufferedReader(new InputStreamReader
                         (urlConnection.getInputStream()), 8192);
@@ -74,7 +76,7 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
                 input.close();
                 data = buffer.toString();
             } else {
-                Log.i(getClass().getName(), "Connection Was Not Established");
+                Log.i(TAG, "Connection Was Not Established");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,10 +91,10 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
         boolean res = sqlDatabaseHelper.insertCountryList(table, countriesArrayList);
 
         if (res) {
-            Log.i(getClass().getName(), "Successfully added " + table + " table to DB");
+            Log.i(TAG, "Successfully added " + table + " table to DB");
         }
         else {
-            Log.i(getClass().getName(), "Failed while adding "  + table + " table to DB");
+            Log.i(TAG, "Failed while adding "  + table + " table to DB");
         }
     }
 
@@ -101,9 +103,9 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
         countriesArrayList.addAll(sqlDatabaseHelper.getCountryList(table));
 
         if (!countriesArrayList.isEmpty()) {
-            Log.i(getClass().getName(), "Successfully read " + table + " table from DB");
+            Log.i(TAG, "Successfully read " + table + " table from DB");
         } else {
-            Log.i(getClass().getName(), "Failed while reading " + table + " table from DB");
+            Log.i(TAG, "Failed while reading " + table + " table from DB");
         }
     }
 
@@ -111,6 +113,6 @@ public class AsynchronousTask extends AsyncTask<Integer, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         adapter.notifyDataSetChanged();
 
-        Log.i(getClass().getName(), "Task Complete!");
+        Log.i(TAG, "Task Complete!");
     }
 }
