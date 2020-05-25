@@ -116,33 +116,9 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
     }
 
     private void onDeleteItemButtonClicked(int pos) {
-        boolean success = sqlDatabaseHelper.deleteCountry(tableSavedCountries, countriesArrayList.get(pos));
+        boolean result = sqlDatabaseHelper.deleteCountry(tableSavedCountries, countriesArrayList.get(pos));
         accessDatabase(1);
-
-        if (success) {
-            Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted " + countriesArrayList.get(pos).getName() + " from DB");
-            Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
-        } else {
-            Log.i(TAG, "onDeleteItemButtonClicked: Failed deleting " + countriesArrayList.get(pos).getName() + " from DB");
-            Toast.makeText(getActivity(), "Deleting failed", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void onSaveItemButtonClicked(int pos) {
-        if (sqlDatabaseHelper.hasCountry(tableSavedCountries, countriesArrayList.get(pos))) {
-            Toast.makeText(getActivity(), "Already in Saved Countries!", Toast.LENGTH_SHORT).show();
-        } else {
-            boolean success = sqlDatabaseHelper.insertCountry(tableSavedCountries, countriesArrayList.get(pos));
-            accessDatabase(1);
-
-            if (success) {
-                Log.i(TAG, "onSaveItemButtonClicked: Successfully saved " + countriesArrayList.get(pos).getName() + " to DB");
-                Toast.makeText(getActivity(), "Successfully saved", Toast.LENGTH_SHORT).show();
-            } else {
-                Log.i(TAG, "onSaveItemButtonClicked: Failed saving " + countriesArrayList.get(pos).getName() + " to DB");
-                Toast.makeText(getActivity(), "Saving failed", Toast.LENGTH_SHORT).show();
-            }
-        }
+        inform(2, result);
     }
 
     private void onUpdateItemButtonClicked(int pos) {
@@ -176,20 +152,13 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
                         et_square.getText().toString());
 
                 if (newCountry.getName().trim().equals("") || newCountry.getCapital().trim().equals("") || newCountry.getSquare().trim().equals("")) {
-                    Toast.makeText(getActivity(), "No empty fields allowed!", Toast.LENGTH_SHORT).show();
+                    makeToast("No empty fields allowed!");
                 } else if (sqlDatabaseHelper.hasCountry(tableSavedCountries, newCountry)) {
-                    Toast.makeText(getActivity(), "This item already exists!", Toast.LENGTH_SHORT).show();
+                    makeToast("This item already exists!");
                 } else {
-                    boolean success = sqlDatabaseHelper.updateCountry(tableSavedCountries, oldCountry, newCountry);
+                    boolean result = sqlDatabaseHelper.updateCountry(tableSavedCountries, oldCountry, newCountry);
                     accessDatabase(1);
-
-                    if (success) {
-                        Log.i(TAG, "onUpdateItemButtonClicked: Successfully updated " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
-                        Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.i(TAG, "onUpdateItemButtonClicked: Failed updating " + oldCountry.getName() + " to " + newCountry.getName() + " at DB");
-                        Toast.makeText(getActivity(), "Updating failed", Toast.LENGTH_SHORT).show();
-                    }
+                    inform(1, result);
 
                     dialog.cancel();
                 }
@@ -199,6 +168,65 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         button_confirm.setOnClickListener(onButtonUpdateClickListener);
 
         dialog.show();
+    }
+
+    private void onSaveItemButtonClicked(int pos) {
+        boolean result = sqlDatabaseHelper.insertCountry(tableSavedCountries, countriesArrayList.get(pos));
+        accessDatabase(1);
+        inform(3, result);
+    }
+
+    private void inform(int opType, boolean result) {
+        // 0 - insert, 1 - update, 2 - delete, 3 - save;
+        switch (opType) {
+            case 0:
+                if (result) {
+                    Log.i(TAG, "onAddItemButtonClicked: Successfully added");
+                    makeToast("Successfully added");
+                } else {
+                    Log.i(TAG, "onAddItemButtonClicked: Adding failed");
+                    makeToast("Adding failed");
+                }
+
+                break;
+
+            case 1:
+                if (result) {
+                    Log.i(TAG, "onUpdateItemButtonClicked: Successfully updated");
+                    makeToast("Successfully updated");
+                } else {
+                    Log.i(TAG, "onUpdateItemButtonClicked: Updating failed");
+                    makeToast("Updating failed");
+                }
+
+                break;
+
+            case 2:
+                if (result) {
+                    Log.i(TAG, "onDeleteItemButtonClicked: Successfully deleted ");
+                    Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.i(TAG, "onDeleteItemButtonClicked: Deleting failed");
+                    Toast.makeText(getActivity(), "Deleting failed", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+
+            case 3:
+                if (result) {
+                    Log.i(TAG, "onSaveItemButtonClicked: Successfully saved");
+                    makeToast("Successfully saved");
+                } else {
+                    Log.i(TAG, "onSaveItemButtonClicked: Saving failed");
+                    makeToast("Saving failed");
+                }
+
+                break;
+        }
+    }
+
+    private void makeToast(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
