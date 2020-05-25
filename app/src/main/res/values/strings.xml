@@ -17,6 +17,7 @@
 
     <string name="btn_text_sign_in">Sign In</string>
     <string name="btn_text_delete">Delete</string>
+    <string name="btn_text_edit">Edit</string>
     <string name="btn_text_update">Update</string>
     <string name="btn_text_save">Save</string>
     <string name="btn_text_saved">Saved</string>

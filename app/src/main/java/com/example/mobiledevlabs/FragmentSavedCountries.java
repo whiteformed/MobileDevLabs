@@ -58,7 +58,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         final Dialog dialog = new Dialog(getNonNullActivity());
         dialog.setContentView(R.layout.dialog_delete_save);
         dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(getResources().getDisplayMetrics().widthPixels, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
 
@@ -73,7 +73,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         iv_flag.setImageResource(countriesArrayList.get(pos).getFlag());
 
         Button button_delete = dialog.findViewById(R.id.button_delete);
-        Button button_update = dialog.findViewById(R.id.button_update);
+        Button button_update = dialog.findViewById(R.id.button_edit);
         Button button_save = dialog.findViewById(R.id.button_save);
 
         View.OnClickListener onButtonDeleteClickListener = new View.OnClickListener() {
@@ -149,7 +149,7 @@ public class FragmentSavedCountries extends Fragment implements RecyclerViewItem
         final Dialog dialog = new Dialog(getNonNullActivity());
         dialog.setContentView(R.layout.dialog_insert_update);
         dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(getResources().getDisplayMetrics().widthPixels, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv_message = dialog.findViewById(R.id.message_tv);
         tv_message.setText(R.string.tv_message_update);

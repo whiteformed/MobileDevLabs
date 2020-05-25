@@ -93,14 +93,14 @@
                 android:textColor="@color/colorActiveButtonText" />
 
             <Button
-                android:id="@+id/button_update"
+                android:id="@+id/button_edit"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorActiveButtonBackground"
                 android:foreground="@drawable/ripple"
-                android:text="@string/btn_text_update"
+                android:text="@string/btn_text_edit"
                 android:textColor="@color/colorActiveButtonText" />
 
             <Button
