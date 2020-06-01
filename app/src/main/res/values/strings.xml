@@ -24,6 +24,7 @@
     <string name="btn_text_add">Add</string>
     <string name="btn_text_confirm">Confirm</string>
 
+    <string name="iv_desc_app_name">App Name</string>
     <string name="iv_desc_logo_background">Logo Background</string>
     <string name="iv_desc_logo_foreground">Logo Foreground</string>
     <string name="iv_desc_user_profile_picture">User Profile Picture</string>
