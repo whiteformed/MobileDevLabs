@@ -8,7 +8,7 @@ import android.os.Handler;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LaunchActivity extends AppCompatActivity {
+public class ActivityLaunch extends AppCompatActivity {
     private Context context = this;
 
     @Override

@@ -2,11 +2,9 @@ package com.example.mobiledevlabs;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -93,7 +91,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tv_country = view.findViewById(R.id.tv_country);
             tv_capital = view.findViewById(R.id.tv_capital);
             iv_flag = view.findViewById(R.id.iv_flag);
-            layout = view.findViewById(R.id.item_frame);
+            layout = view.findViewById(R.id.item_card);
         }
     }
 }

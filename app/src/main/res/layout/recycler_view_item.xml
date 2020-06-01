@@ -1,50 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_frame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground">
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="true">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/item_card"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="10dp"
-        android:gravity="end"
-        android:orientation="vertical"
-        tools:ignore="RelativeOverlap">
+        android:background="?android:attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tv_country"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:scrollbars="vertical"
-            android:textSize="30sp"
-            tools:text="Country" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="end"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            tools:ignore="RelativeOverlap">
 
-        <TextView
-            android:id="@+id/tv_capital"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:scrollbars="vertical"
-            android:textSize="20sp"
-            tools:text="Capital" />
+            <TextView
+                android:id="@+id/tv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:scrollbars="vertical"
+                android:textSize="30sp"
+                tools:text="Country" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_capital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:scrollbars="vertical"
+                android:textSize="20sp"
+                tools:text="Capital" />
 
-    <ImageView
-        android:id="@+id/iv_flag"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/iv_desc_country_flag">
+        </LinearLayout>
 
-    </ImageView>
+        <ImageView
+            android:id="@+id/iv_flag"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/iv_desc_country_flag">
 
-</RelativeLayout>
+        </ImageView>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

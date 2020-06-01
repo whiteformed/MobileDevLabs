@@ -20,11 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class FragmentChooseCountry extends Fragment implements RecyclerViewItemClickListener {
+    private View view;
     private RecyclerViewAdapter adapter;
     private ArrayList<Country> countriesArrayList;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -104,8 +106,19 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
             View.OnClickListener onButtonSaveClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onSaveItemButtonClicked(pos);
                     dialog.cancel();
+
+                    final Snackbar snackbar;
+                    snackbar = Snackbar.make(view, "Add " + countriesArrayList.get(pos).getName() + " to Saved Countries?", Snackbar.LENGTH_SHORT);
+                    View.OnClickListener onClickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onSaveItemButtonClicked(pos);
+                            snackbar.dismiss();
+                        }
+                    };
+                    snackbar.setAction("Submit", onClickListener);
+                    snackbar.show();
                 }
             };
 
@@ -278,7 +291,7 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_choose_country, container, false);
+        view = inflater.inflate(R.layout.fragment_choose_country, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_choose);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_choose);
