@@ -1,8 +1,13 @@
 package com.example.mobiledevlabs;
 
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +27,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.nio.channels.Channel;
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -33,6 +40,8 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
     private SqlDatabaseHelper sqlDatabaseHelper;
     private String tableCountries = SqlDatabaseHelper.getCountriesTableName();
     private String tableSavedCountries = SqlDatabaseHelper.getSavedCountriesTableName();
+
+    NotificationManagerCompat notificationManager;
 
     private static final String TAG = "FragmentChooseCountry";
 
@@ -164,6 +173,19 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
                     accessDatabase(1);
                     inform(0, result);
 
+
+                    String channelID = "1";
+                    createNotificationChannel(channelID);
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getNonNullActivity(), channelID)
+                            .setSmallIcon(R.drawable.ic_notification)
+                            .setContentTitle("DB Operation")
+                            .setContentText("Added an item")
+                            .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+                    notificationManager = NotificationManagerCompat.from(getNonNullActivity());
+                    notificationManager.notify(1, builder.build());
+
                     dialog.cancel();
                 }
             }
@@ -172,6 +194,17 @@ public class FragmentChooseCountry extends Fragment implements RecyclerViewItemC
         button_confirm.setOnClickListener(onButtonAddClickListener);
 
         dialog.show();
+    }
+
+    private void createNotificationChannel(String id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.app_name);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(id, name, importance);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getNonNullActivity());
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void onDeleteItemButtonClicked(int pos) {

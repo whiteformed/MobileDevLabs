@@ -69,10 +69,11 @@ public class ActivityLogin extends AppCompatActivity {
             assert locationManager != null;
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-            assert location != null;
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-            country = getLocation(latitude, longitude);
+            if (location != null) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                country = getLocation(latitude, longitude);
+            }
         }
 
         super.onCreate(savedInstanceState);
