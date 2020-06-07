@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <ImageView
-        android:contentDescription="@string/iv_desc_logo_background"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:contentDescription="@string/iv_desc_logo_background"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toTopOf="@id/warningText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,9 +17,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:contentDescription="@string/iv_desc_logo_foreground"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:contentDescription="@string/iv_desc_logo_foreground"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toTopOf="@id/warningText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,18 +31,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        tools:text="Warning Message"
         android:textAlignment="center"
         android:textColor="#F61010"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/linear_layout"
-
         app:layout_constraintHorizontal_bias="0.498"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+        app:layout_constraintVertical_bias="0.935"
+        tools:text="Warning Message" />
 
     <LinearLayout
         android:id="@+id/linear_layout"
@@ -62,8 +63,8 @@
             android:layout_weight="20"
             android:backgroundTint="#1FADED"
             android:hint="@string/hnt_login"
-            android:inputType="text"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/inpPassword"
@@ -72,8 +73,8 @@
             android:layout_weight="20"
             android:backgroundTint="#1FADED"
             android:hint="@string/hnt_password"
-            android:inputType="textPassword"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/confirmButton"
@@ -83,8 +84,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_weight="10"
-            android:foreground="@drawable/ripple"
             android:background="@color/colorActiveButtonBackground"
+            android:foreground="@drawable/ripple"
             android:text="@string/btn_text_sign_in"
             android:textAlignment="center"
             android:textColor="@color/colorActiveButtonText" />
